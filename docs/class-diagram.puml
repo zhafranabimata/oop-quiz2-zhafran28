@@ -1,0 +1,98 @@
+@startuml class-diagram
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontSize 13
+skinparam class {
+  BorderColor Black
+  ArrowColor Black
+  BackgroundColor White
+  BackgroundColor<<given>> #E5E7EB
+  BackgroundColor<<complete the methods>> #FEF9C3
+  BackgroundColor<<create this class>> #DCFCE7
+}
+skinparam interface {
+  BorderColor Black
+  BackgroundColor<<given>> #E5E7EB
+}
+hide empty members
+
+legend left
+  | Abu-abu | sudah lengkap, jangan diubah |
+  | Kuning | lengkapi isi method-nya |
+  | Hijau | kelas baru, buat sendiri |
+endlegend
+
+class Passenger <<complete the methods>> {
+  - passengerId : String
+  - name : String
+  + Passenger(passengerId : String, name : String)
+  + getPassengerId() : String
+  + getName() : String
+  + setName(name : String) : void
+}
+
+abstract class Ride <<given>> {
+  - rideId : String
+  - passenger : Passenger
+  - distanceKm : double
+  + Ride(rideId : String, passenger : Passenger, distanceKm : double)
+  + getRideId() : String
+  + getPassenger() : Passenger
+  + getDistanceKm() : double
+  + calculateFare() : double {abstract}
+}
+
+interface Insurable <<given>> {
+  + insuranceFee() : double
+}
+
+class BikeRide <<create this class>> {
+  + BikeRide(rideId : String, passenger : Passenger, distanceKm : double)
+  + calculateFare() : double
+}
+
+class CarRide <<create this class>> {
+  + CarRide(rideId : String, passenger : Passenger, distanceKm : double)
+  + calculateFare() : double
+  + insuranceFee() : double
+}
+
+class InvalidDistanceException <<given>> {
+  + InvalidDistanceException(message : String)
+}
+
+class RideCalculator <<complete the methods>> {
+  + totalFare(orders : List<Ride>) : double {static}
+  + totalInsurance(orders : List<Ride>) : double {static}
+  + validate(order : Ride) : void {static}
+  + isAcceptable(order : Ride) : boolean {static}
+}
+
+interface PaymentMethod <<given>> {
+  + pay(rideId : String, amount : double) : void
+}
+
+class CashPayment <<given>> {
+  + pay(rideId : String, amount : double) : void
+}
+
+class RideDispatcher <<complete the methods>> {
+  + RideDispatcher(payment : PaymentMethod)
+  + add(order : Ride) : void
+  + findById(rideId : String) : Ride
+  + count() : int
+  + getOrders() : List<Ride>
+  + checkout(rideId : String) : void
+}
+
+Ride <|-- BikeRide
+Ride <|-- CarRide
+Insurable <|.. CarRide
+Ride --> "1" Passenger : milik
+PaymentMethod <|.. CashPayment
+RideDispatcher --> "1" PaymentMethod : memakai interface
+RideDispatcher o-- "0..*" Ride : menyimpan
+RideCalculator ..> Ride : memproses
+RideCalculator ..> InvalidDistanceException : throws
+InvalidDistanceException -[hidden]- Insurable
+@enduml

@@ -1,0 +1,248 @@
+name: Autograding Tests
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Passenger Constructor and Getter Test
+        id: test-passenger-constructor-getter
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Passenger Constructor and Getter Test
+          command: mvn -q test -Dtest=PassengerConstructorGetterTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 5
+
+      - name: Passenger Encapsulation Test
+        id: test-passenger-encapsulation
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Passenger Encapsulation Test
+          command: mvn -q test -Dtest=PassengerEncapsulationTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 10
+
+      - name: Subclass Structure Test
+        id: test-subclass-structure
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Subclass Structure Test
+          command: mvn -q test -Dtest=SubclassStructureTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 4
+
+      - name: BikeRide Price Test
+        id: test-bike-ride-price
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: BikeRide Price Test
+          command: mvn -q test -Dtest=BikeRidePriceTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 4
+
+      - name: CarRide Price Test
+        id: test-car-ride-price
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: CarRide Price Test
+          command: mvn -q test -Dtest=CarRidePriceTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 4
+
+      - name: Insurable Interface Test
+        id: test-ability-interface
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Insurable Interface Test
+          command: mvn -q test -Dtest=AbilityInterfaceTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 4
+
+      - name: Abstract Class and Interface Rules Test
+        id: test-abstract-and-interface-rules
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Abstract Class and Interface Rules Test
+          command: mvn -q test -Dtest=AbstractAndInterfaceRulesTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 4
+
+      - name: RideCalculator Total Price (Polymorphism) Test
+        id: test-total-price
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideCalculator Total Price (Polymorphism) Test
+          command: mvn -q test -Dtest=TotalPriceTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 5
+
+      - name: RideCalculator Insurable Total (instanceof) Test
+        id: test-total-ability
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideCalculator Insurable Total (instanceof) Test
+          command: mvn -q test -Dtest=TotalAbilityTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 5
+
+      - name: RideCalculator Validate (Exception) Test
+        id: test-validate
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideCalculator Validate (Exception) Test
+          command: mvn -q test -Dtest=ValidateTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 5
+
+      - name: RideCalculator isAcceptable (try/catch) Test
+        id: test-is-acceptable
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideCalculator isAcceptable (try/catch) Test
+          command: mvn -q test -Dtest=IsAcceptableTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 5
+
+      - name: RideDispatcher Add and Count Test
+        id: test-desk-add-count
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Add and Count Test
+          command: mvn -q test -Dtest=DeskAddCountTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: RideDispatcher Find By Id Test
+        id: test-desk-find-by-id
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Find By Id Test
+          command: mvn -q test -Dtest=DeskFindByIdTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: RideDispatcher Find Missing Returns Null Test
+        id: test-desk-find-missing
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Find Missing Returns Null Test
+          command: mvn -q test -Dtest=DeskFindMissingTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: RideDispatcher Keeps Insertion Order Test
+        id: test-desk-order
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Keeps Insertion Order Test
+          command: mvn -q test -Dtest=DeskOrderTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: RideDispatcher Uses List and Map Test
+        id: test-desk-collections
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Uses List and Map Test
+          command: mvn -q test -Dtest=DeskCollectionsTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: RideDispatcher Depends on PaymentMethod Interface Test (DIP)
+        id: test-desk-interface
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Depends on PaymentMethod Interface Test (DIP)
+          command: mvn -q test -Dtest=DeskInterfaceTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 5
+
+      - name: Checkout Uses Injected PaymentMethod Test (DIP)
+        id: test-checkout-uses-printer
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Checkout Uses Injected PaymentMethod Test (DIP)
+          command: mvn -q test -Dtest=CheckoutUsesPrinterTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 7
+
+      - name: RideDispatcher Prints Nothing Itself Test (SRP)
+        id: test-desk-prints-nothing
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: RideDispatcher Prints Nothing Itself Test (SRP)
+          command: mvn -q test -Dtest=DeskPrintsNothingTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 4
+
+      - name: New Subclass Needs No Change Test (OCP)
+        id: test-new-subclass-no-change
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: New Subclass Needs No Change Test (OCP)
+          command: mvn -q test -Dtest=NewSubclassNoChangeTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 8
+
+      - name: Any Subclass Substitutes Test (LSP)
+        id: test-substitution
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Any Subclass Substitutes Test (LSP)
+          command: mvn -q test -Dtest=SubstitutionTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: No Concrete PaymentMethod Inside RideDispatcher Test (DIP)
+        id: test-no-concrete-printer
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: No Concrete PaymentMethod Inside RideDispatcher Test (DIP)
+          command: mvn -q test -Dtest=NoConcretePrinterTest -DfailIfNoTests=true
+          timeout: 10
+          max-score: 3
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          TEST-PASSENGER-CONSTRUCTOR-GETTER_RESULTS: "${{ steps.test-passenger-constructor-getter.outputs.result }}"
+          TEST-PASSENGER-ENCAPSULATION_RESULTS: "${{ steps.test-passenger-encapsulation.outputs.result }}"
+          TEST-SUBCLASS-STRUCTURE_RESULTS: "${{ steps.test-subclass-structure.outputs.result }}"
+          TEST-BIKE-RIDE-PRICE_RESULTS: "${{ steps.test-bike-ride-price.outputs.result }}"
+          TEST-CAR-RIDE-PRICE_RESULTS: "${{ steps.test-car-ride-price.outputs.result }}"
+          TEST-ABILITY-INTERFACE_RESULTS: "${{ steps.test-ability-interface.outputs.result }}"
+          TEST-ABSTRACT-AND-INTERFACE-RULES_RESULTS: "${{ steps.test-abstract-and-interface-rules.outputs.result }}"
+          TEST-TOTAL-PRICE_RESULTS: "${{ steps.test-total-price.outputs.result }}"
+          TEST-TOTAL-ABILITY_RESULTS: "${{ steps.test-total-ability.outputs.result }}"
+          TEST-VALIDATE_RESULTS: "${{ steps.test-validate.outputs.result }}"
+          TEST-IS-ACCEPTABLE_RESULTS: "${{ steps.test-is-acceptable.outputs.result }}"
+          TEST-DESK-ADD-COUNT_RESULTS: "${{ steps.test-desk-add-count.outputs.result }}"
+          TEST-DESK-FIND-BY-ID_RESULTS: "${{ steps.test-desk-find-by-id.outputs.result }}"
+          TEST-DESK-FIND-MISSING_RESULTS: "${{ steps.test-desk-find-missing.outputs.result }}"
+          TEST-DESK-ORDER_RESULTS: "${{ steps.test-desk-order.outputs.result }}"
+          TEST-DESK-COLLECTIONS_RESULTS: "${{ steps.test-desk-collections.outputs.result }}"
+          TEST-DESK-INTERFACE_RESULTS: "${{ steps.test-desk-interface.outputs.result }}"
+          TEST-CHECKOUT-USES-PRINTER_RESULTS: "${{ steps.test-checkout-uses-printer.outputs.result }}"
+          TEST-DESK-PRINTS-NOTHING_RESULTS: "${{ steps.test-desk-prints-nothing.outputs.result }}"
+          TEST-NEW-SUBCLASS-NO-CHANGE_RESULTS: "${{ steps.test-new-subclass-no-change.outputs.result }}"
+          TEST-SUBSTITUTION_RESULTS: "${{ steps.test-substitution.outputs.result }}"
+          TEST-NO-CONCRETE-PRINTER_RESULTS: "${{ steps.test-no-concrete-printer.outputs.result }}"
+        with:
+          runners: test-passenger-constructor-getter,test-passenger-encapsulation,test-subclass-structure,test-bike-ride-price,test-car-ride-price,test-ability-interface,test-abstract-and-interface-rules,test-total-price,test-total-ability,test-validate,test-is-acceptable,test-desk-add-count,test-desk-find-by-id,test-desk-find-missing,test-desk-order,test-desk-collections,test-desk-interface,test-checkout-uses-printer,test-desk-prints-nothing,test-new-subclass-no-change,test-substitution,test-no-concrete-printer
