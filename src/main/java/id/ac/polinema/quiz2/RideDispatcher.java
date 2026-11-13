@@ -1,6 +1,9 @@
 package id.ac.polinema.quiz2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TAHAP 4 dan 5 (collections dan SOLID): pengatur perjalanan yang menyimpan
@@ -22,8 +25,14 @@ public class RideDispatcher {
      *
      * @param payment metode pembayaran yang dipakai saat checkout
      */
+    private List<Ride> orders;
+    private Map<String, Ride> ridesById;
+    private PaymentMethod payment;
+
     public RideDispatcher(PaymentMethod payment) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        this.payment = payment;
+        this.orders = new ArrayList<>();
+        this.ridesById = new HashMap<>();
     }
 
     /**
@@ -32,7 +41,8 @@ public class RideDispatcher {
      * @param order perjalanan yang ditambahkan
      */
     public void add(Ride order) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        orders.add(order);
+        ridesById.put(order.getRideId(), order);;
     }
 
     /**
@@ -42,21 +52,21 @@ public class RideDispatcher {
      * @return perjalanan yang cocok, atau {@code null} bila tidak ada
      */
     public Ride findById(String rideId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+         return ridesById.get(rideId);
     }
 
     /**
      * @return jumlah perjalanan yang tersimpan
      */
     public int count() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.size();
     }
 
     /**
      * @return daftar perjalanan menurut urutan penambahan
      */
     public List<Ride> getOrders() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new ArrayList<>(orders);
     }
 
     /**
@@ -68,6 +78,10 @@ public class RideDispatcher {
      * @param rideId kode perjalanan yang di-checkout
      */
     public void checkout(String rideId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Ride order = findById(rideId);
+
+        if (order != null) {
+        payment.pay(order.getRideId(),order.calculateFare());
+        };
     }
 }
