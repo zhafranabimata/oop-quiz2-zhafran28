@@ -8,7 +8,6 @@ package id.ac.polinema.quiz2;
  * kelas ini sendiri: objeknya harus diberikan dari luar lewat constructor.
  */
 public class CashPayment implements PaymentMethod {
-
     @Override
     public void pay(String rideId, double amount) {
         System.out.println("Payment " + rideId + ": Rp " + amount);

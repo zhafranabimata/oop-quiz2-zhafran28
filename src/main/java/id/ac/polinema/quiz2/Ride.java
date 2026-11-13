@@ -8,7 +8,6 @@ package id.ac.polinema.quiz2;
  * Setiap subclass wajib mengisi method abstrak {@code calculateFare()}.
  */
 public abstract class Ride {
-
     private String rideId;
     private Passenger passenger;
     private double distanceKm;
@@ -18,15 +17,12 @@ public abstract class Ride {
         this.passenger = passenger;
         this.distanceKm = distanceKm;
     }
-
     public String getRideId() {
         return rideId;
     }
-
     public Passenger getPassenger() {
         return passenger;
     }
-
     public double getDistanceKm() {
         return distanceKm;
     }
