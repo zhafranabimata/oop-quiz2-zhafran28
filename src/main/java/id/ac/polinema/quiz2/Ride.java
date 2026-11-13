@@ -30,8 +30,6 @@ public abstract class Ride {
     public double getDistanceKm() {
         return distanceKm;
     }
-
-    
     /**
      * Menghitung tarif perjalanan ini. Aturannya berbeda untuk tiap subclass.
      *

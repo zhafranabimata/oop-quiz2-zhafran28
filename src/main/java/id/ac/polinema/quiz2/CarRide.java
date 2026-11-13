@@ -5,7 +5,6 @@ public class CarRide extends Ride implements Insurable{
         super(rideId, passenger, distanceKm);
     }
     @Override 
-
     public double insuranceFee(){
         return 3000;
     }
