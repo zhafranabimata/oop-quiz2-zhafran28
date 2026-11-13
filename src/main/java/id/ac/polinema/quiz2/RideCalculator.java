@@ -1,5 +1,6 @@
 package id.ac.polinema.quiz2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class RideCalculator {
      * @param orders daftar perjalanan
      * @return jumlah semua tarif, atau 0 bila daftar kosong
      */
+    private ArrayList orders;
     public static double totalFare(List<Ride> orders) {
         throw new UnsupportedOperationException("Not implemented yet");
     }

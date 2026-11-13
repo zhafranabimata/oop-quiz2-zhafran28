@@ -31,10 +31,11 @@ public abstract class Ride {
         return distanceKm;
     }
 
+    
     /**
      * Menghitung tarif perjalanan ini. Aturannya berbeda untuk tiap subclass.
      *
-     * @return tarif dalam Rupiah
+     tarif dalam Rupiah* @return 
      */
     public abstract double calculateFare();
 }
