@@ -1,6 +1,5 @@
 package id.ac.polinema.quiz2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +19,6 @@ public class RideCalculator {
      * @param orders daftar perjalanan
      * @return jumlah semua tarif, atau 0 bila daftar kosong
      */
-    List<Ride> orders = new ArrayList<>();
     public static double totalFare(List<Ride> orders) {
         double total = 0.0;
         for (Ride ride : orders) {
@@ -58,9 +56,7 @@ public class RideCalculator {
     public static void validate(Ride order) throws InvalidDistanceException {
         double distance = order.getDistanceKm();
         if (distance <= 0 || distance > 50) {
-            throw new InvalidDistanceException(
-                "Invalid distance: " + distance
-            );
+            throw new InvalidDistanceException("Invalid distance: " + distance);
         }
     }
 
